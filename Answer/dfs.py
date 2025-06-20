@@ -55,8 +55,9 @@ grid = [    [0,	0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0,	0,	0,	0,	0,	1,	1,	0,	0,	0]
 ]
 
-n= 14
-m=10
+n = len(grid)
+m = len(grid[0])
+
 
 for i in range(n):
     for j in range(m):
