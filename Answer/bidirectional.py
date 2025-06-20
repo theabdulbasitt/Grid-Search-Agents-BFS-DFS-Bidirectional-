@@ -1,6 +1,6 @@
 import random
 
-def bidirectional(grid, size):
+def bidirectional(grid, row, coloumn):
     visited_S = []
     visited_E = []
     stack_S = []
@@ -13,9 +13,9 @@ def bidirectional(grid, size):
     else:
         return "No starting point"
     
-    if grid[size-1][size-1] == 0:
-        stack_E.append((size-1, size-1))
-        visited_E.append((size-1,size-1))
+    if grid[row-1][coloumn-1] == 0:
+        stack_E.append((row-1, coloumn-1))
+        visited_E.append((row-1,coloumn-1))
     else:
         return "No goal point"
 
@@ -25,10 +25,10 @@ def bidirectional(grid, size):
 
         if stack_S:
             i, j = stack_S[-1]
-            if  j < (size-1) and grid[i][j+1] == 0 and (i,j+1) not in visited_S:
+            if  j < (coloumn-1) and grid[i][j+1] == 0 and (i,j+1) not in visited_S:
                     stack_S.append((i,j+1))
                     visited_S.append((i,j+1))
-            elif i < (size-1) and grid[i+1][j] == 0 and (i+1,j) not in visited_S:
+            elif i < (row-1) and grid[i+1][j] == 0 and (i+1,j) not in visited_S:
                     stack_S.append((i+1,j))
                     visited_S.append((i+1,j))
             else:
@@ -54,6 +54,7 @@ def bidirectional(grid, size):
     print("\nVisited Nodes (DFS Order):")
     print(f"From start : {visited_S}")
     print(f"From end : {visited_E}")
+    print("Bidirectional traversal ")
 
     merged = []
     for item in visited_S + visited_E[::-1]:
@@ -69,31 +70,31 @@ def bidirectional(grid, size):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-n=5
-grid = []
-for i in range(n):
-    row = []
-    for j in range(n):
-        if i==0 and j==0:
-            row.append(0) 
-        elif (i==4 and j == 4):
-            row.append(0)
-        elif ( i==1 and j ==0 ) and grid[0][1] == 1:
-            row.append(0)
-        elif (i == 4 and j ==3) and grid[3][4] == 1:
-            row.append(0)
-        else:
-            row.append(random.randint(0,1)) 
-    grid.append(row)
+grid = [    [0,	0, 0, 0, 0, 0, 0, 0, 0, 0],	
+            [0,	0,	0,	1,	1,	0,	0,   0,	0,	0 ],  
+            [0,	0,	0,	1,	1,	0,	0,   0,	1,	1],
+            [0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+            [0,	1,	1,	1,	1,	0,	0,	0,	0,	1], 
+            [0,	0,	0,	0,	0,	0,	0,	0,	1,	0],
+            [0,	0,	0,	0,	0,	1,	1,	0,	0,	0],
+            [0,	0,	0,	0,	0,	1,	1,	0,	0,	0],	
+            [0,	1,	1,	1,	0,	1,	1,	0,	0,	0],
+            [0,	1,	1,	1,	0,	1,	1,	0,	0,	0],
+            [0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+            [0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+            [0,	0,	0,	0,	0,	1,	1,	0,	0,	0],
+            [0,	0,	0,	0,	0,	1,	1,	0,	0,	0]
+]
+n = 14
+m= 10
 
-
 for i in range(n):
-    for j in range(n):
+    for j in range(m):
         print(grid[i][j], end=" ")
     print()
 
 
 print("Calling function")
-x = bidirectional(grid, n)
+x = bidirectional(grid, n, m)
 
 
